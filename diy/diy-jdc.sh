@@ -26,3 +26,5 @@ sed -i '/VERSION_NUMBER:=$(call qstrip,$(CONFIG_VERSION_NUMBER))/,+1c VERSION_NU
 # TTYD 自动登录
 sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
 
+# 修改镜像限制大小
+sed -i '/define Device\/jdcloud_re-sp-01b/,/endef/ s/IMAGE_SIZE := [0-9]*k/IMAGE_SIZE := 1081344k/' target/linux/ramips/image/mt7621.mk
