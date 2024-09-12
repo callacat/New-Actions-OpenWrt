@@ -21,7 +21,7 @@ sed -i 's/ImmortalWrt/AC2100/g' package/base-files/files/bin/config_generate
 
 # 版本号里显示一个自己的名字（281677160 build $(TZ=UTC-8 date "+%Y.%m.%d") @ 这些都是后增加的）
 # sed -i "s/OpenWrt /Dswang build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
-sed -i '/VERSION_NUMBER:=$(call qstrip,$(CONFIG_VERSION_NUMBER))/,+1c VERSION_NUMBER := Dswang Build $(shell TZ=UTC-8 date "+%Y-%m-%d") @ Firmware $(REVISION)' include/version.mk
+sed -i '/VERSION_NUMBER:=$(call qstrip,$(CONFIG_VERSION_NUMBER))/,+1c VERSION_NUMBER := Dswang Build $(shell TZ=UTC-8 date "+%Y-%m-%d") @ Firmware' include/version.mk
 
 # TTYD 自动登录
 sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
