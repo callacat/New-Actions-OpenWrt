@@ -10,7 +10,7 @@
 # See /LICENSE for more information.
 #
 
-name: AX6000 stock layout Builder
+name: AX6000 Builder
 
 on:
   repository_dispatch:
