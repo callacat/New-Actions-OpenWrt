@@ -17,14 +17,10 @@
 #sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 # Modify hostname
-sed -i 's/ImmortalWrt/JDCloud/g' package/base-files/files/bin/config_generate
+sed -i '/uci commit system/i\uci set system.@system[0].hostname='JDCloud RE-SP-01B'' package/lean/default-settings/files/zzz-default-settings
 
 # 版本号里显示一个自己的名字（281677160 build $(TZ=UTC-8 date "+%Y.%m.%d") @ 这些都是后增加的）
-# sed -i "s/OpenWrt /Dswang build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
-sed -i '/VERSION_NUMBER:=$(call qstrip,$(CONFIG_VERSION_NUMBER))/,+1c VERSION_NUMBER := Dswang Build $(shell TZ=UTC-8 date "+%Y-%m-%d") @ Firmware Version' include/version.mk
+sed -i "s/LEDE /Dswang build $(TZ=UTC-8 date "+%Y.%m.%d") @ LEDE /g" package/lean/default-settings/files/zzz-default-settings
 
 # TTYD 自动登录
 sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
-
-# 修改镜像限制大小
-sed -i '/define Device\/jdcloud_re-sp-01b/,/endef/ s/IMAGE_SIZE := [0-9]*k/IMAGE_SIZE := 1081344k/' target/linux/ramips/image/mt7621.mk
