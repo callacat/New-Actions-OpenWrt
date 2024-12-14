@@ -62,14 +62,13 @@ jobs:
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
         cd openwrt
-        git checkout b743ccd20ce48beee1b283415b74b462b916c3b6
         $GITHUB_WORKSPACE/$DIY_P1_SH
 
     - name: Update feeds
-      run: cd openwrt && git checkout b743ccd20ce48beee1b283415b74b462b916c3b6 && ./scripts/feeds update -a
+      run: cd openwrt && ./scripts/feeds update -a
 
     - name: Install feeds
-      run: cd openwrt && git checkout b743ccd20ce48beee1b283415b74b462b916c3b6 && ./scripts/feeds install -a
+      run: cd openwrt && ./scripts/feeds install -a
 
     - name: Load custom configuration
       run: |
@@ -84,7 +83,6 @@ jobs:
       id: package
       run: |
         cd openwrt
-        git checkout b743ccd20ce48beee1b283415b74b462b916c3b6
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
@@ -94,7 +92,6 @@ jobs:
       id: compile
       run: |
         cd openwrt
-        git checkout b743ccd20ce48beee1b283415b74b462b916c3b6
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 || make -j1 V=s
         echo "status=success" >> $GITHUB_OUTPUT

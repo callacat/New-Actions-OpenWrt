@@ -25,3 +25,5 @@ sed -i "s/LEDE /Dswang build $(TZ=UTC-8 date "+%Y.%m.%d") @ LEDE /g" package/lea
 # TTYD 自动登录
 sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
 
+# 修改 内核
+sed -i 's/KERNEL_PATCHVER:=5.10/KERNEL_PATCHVER:=5.15/g' target/linux/ramips/Makefile
