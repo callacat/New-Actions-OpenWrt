@@ -76,7 +76,6 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
-        git checkout b743ccd20ce48beee1b283415b74b462b916c3b6
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
     - name: Download package
@@ -115,7 +114,7 @@ jobs:
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
         cd openwrt/bin/targets/*/*
-        rm -rf packages feeds.buildinfo *manifest sha256sums profiles.json version.buildinfo
+        rm -rf packages feeds.buildinfo *manifest *initramfs* sha256sums profiles.json version.buildinfo
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
 
