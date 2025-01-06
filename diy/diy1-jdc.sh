@@ -17,4 +17,4 @@
 #echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 # 修改内核
-sed -i 's/^KERNEL_PATCHVER:=5.10/KERNEL_PATCHVER:=6.1/' target/linux/ramips/Makefile
+sed -i 's/^KERNEL_PATCHVER:=5.10/KERNEL_PATCHVER:=6.6/' target/linux/ramips/Makefile
