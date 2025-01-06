@@ -63,6 +63,7 @@ jobs:
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
+        cat target/linux/ramips/Makefile
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
@@ -78,6 +79,21 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
         cat .config
+
+    - name: Check Kernel Versions
+      run: |
+        cd openwrt
+        OPENWRT_ARCH=$(grep '^CONFIG_TARGET_.*=y' .config | sed -E 's/^CONFIG_TARGET_([^_]+).*=y/\1/')
+        echo "Current architecture: $OPENWRT_ARCH"
+        if [ -n "$OPENWRT_ARCH" ]; then
+          cd target/linux/$OPENWRT_ARCH
+          echo "Makefile content:"
+          cat Makefile | grep '^KERNEL_PATCHVER'
+          echo "\nAvailable patch directories:"
+          ls -d patches-*
+        else
+          echo "Could not determine architecture from .config"
+        fi
 
     - name: Download package
       id: package
