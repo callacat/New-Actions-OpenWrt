@@ -78,6 +78,9 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
+    - name: Check .config content
+      run: cat openwrt/.config
+
     - name: Download package
       id: package
       run: |
